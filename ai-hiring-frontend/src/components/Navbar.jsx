@@ -5,10 +5,10 @@ import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   // NavLink will add an 'active' class to the link that matches the current URL
   const getLinkClass = ({ isActive }) =>
-    `px-3 py-2 rounded-md text-sm font-medium ${
+    `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
       isActive
-        ? 'bg-gray-900 text-white'
-        : 'text-gray-700 hover:bg-gray-200 hover:text-black'
+        ? 'bg-blue-600 text-white' // Use accent color for active link
+        : 'text-gray-600 hover:bg-gray-100 hover:text-black'
     }`;
 
   return (
@@ -18,9 +18,9 @@ const Navbar = () => {
           {/* Brand */}
           <Link to="/" className="flex items-center gap-3">
             <div 
-              className="logo bg-gray-800 w-10 h-10 rounded-full" 
+              className="logo bg-blue-600 w-10 h-10 rounded-full" 
               aria-hidden 
-              // Add a simple logo placeholder
+              // Simple logo placeholder
             />
             <div>
               <div className="text-lg font-bold text-gray-900">AI Hiring</div>

@@ -10,6 +10,7 @@ const CandidateForm = () => {
   });
   const [jobs, setJobs] = useState([]);
   const [loadingJobs, setLoadingJobs] = useState(false);
+  const [message, setMessage] = useState(null); // { type: 'success' | 'error', text: string }
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -26,27 +27,46 @@ const CandidateForm = () => {
     fetchJobs();
   }, []);
 
+  const clearMessage = () => setMessage(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    clearMessage();
     try {
       await addCandidate(candidate);
-      alert("Candidate uploaded successfully!");
+      setMessage({
+        type: "success",
+        text: "Candidate uploaded successfully!",
+      });
       setCandidate({ name: "", email: "", jobId: "", resumeText: "" });
     } catch (err) {
       console.error(err);
-      alert("Failed to upload candidate. Check console.");
+      setMessage({
+        type: "error",
+        text: "Failed to upload candidate. Please try again.",
+      });
     }
   };
 
   return (
     <div className="bg-white shadow p-6 rounded-lg max-w-lg mx-auto mt-8">
       <h2 className="text-xl font-semibold mb-4">Upload Resume</h2>
+      
+      {message && (
+        <div className={`message-box message-${message.type}`}>
+          {message.text}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-3">
         <input
           className="form-input"
           placeholder="Name"
           value={candidate.name}
-          onChange={(e) => setCandidate({ ...candidate, name: e.target.value })}
+          onChange={(e) => {
+            setCandidate({ ...candidate, name: e.target.value });
+            clearMessage();
+          }}
           required
         />
         <input
@@ -54,9 +74,10 @@ const CandidateForm = () => {
           placeholder="Email"
           type="email"
           value={candidate.email}
-          onChange={(e) =>
-            setCandidate({ ...candidate, email: e.target.value })
-          }
+          onChange={(e) => {
+            setCandidate({ ...candidate, email: e.target.value });
+            clearMessage();
+          }}
           required
         />
 
@@ -66,9 +87,10 @@ const CandidateForm = () => {
           <select
             className="form-input"
             value={candidate.jobId}
-            onChange={(e) =>
-              setCandidate({ ...candidate, jobId: e.target.value })
-            }
+            onChange={(e) => {
+              setCandidate({ ...candidate, jobId: e.target.value });
+              clearMessage();
+            }}
             required
           >
             <option value="">Select Job</option>
@@ -85,9 +107,10 @@ const CandidateForm = () => {
           placeholder="Paste Resume Text"
           rows="6"
           value={candidate.resumeText}
-          onChange={(e) =>
-            setCandidate({ ...candidate, resumeText: e.target.value })
-          }
+          onChange={(e) => {
+            setCandidate({ ...candidate, resumeText: e.target.value });
+            clearMessage();
+          }}
           required
         />
 

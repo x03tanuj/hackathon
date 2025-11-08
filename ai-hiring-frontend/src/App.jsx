@@ -14,19 +14,22 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        
-        {/* New Portal Routes */}
-        <Route path="/recruiter" element={<RecruiterPortal />} />
-        <Route path="/applicant" element={<ApplicantPortal />} />
+      {/* Add a main container for consistent padding and width */}
+      <main className="container mx-auto p-4">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          
+          {/* New Portal Routes */}
+          <Route path="/recruiter" element={<RecruiterPortal />} />
+          <Route path="/applicant" element={<ApplicantPortal />} />
 
-        {/* Keep these as recruiter-specific pages */}
-        <Route path="/jobs" element={<Jobs />} />
-        <Route path="/candidates" element={<Candidates />} />
-        
-        <Route path="/users" element={<UserSetup />} />
-      </Routes>
+          {/* Keep these as recruiter-specific pages */}
+          <Route path="/jobs" element={<Jobs />} />
+          <Route path="/candidates" element={<Candidates />} />
+          
+          <Route path="/users" element={<UserSetup />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }
