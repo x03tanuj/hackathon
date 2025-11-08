@@ -1,13 +1,7 @@
-/* Simple utility stylesheet to approximate commonly used Tailwind-like classes
-	 The original project used Tailwind classes in JSX but Tailwind wasn't configured
-	 in package.json. This stylesheet provides a compact look-and-feel and maps
-	 the class names used across components to plain CSS so the app looks good
-	 without adding Tailwind as a dependency. */
-/* ... your existing styles ... */
 
 :root {
-  --bg: #0f1724; /* dark */
-  --muted: #94a3b8;
+  --bg: #ffffff; /* light */
+  --muted: #525f7f;
   --card: #ffffff;
   --accent: #2563eb; /* blue */
   --success: #16a34a;
@@ -17,20 +11,27 @@
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-  Roboto, "Helvetica Neue", Arial;
+    Roboto, "Helvetica Neue", Arial;
   color: #0b1220;
-  background: linear-gradient(180deg, #eef2ff 0%, #fff 100%);
+  /* Reset to a light gray background, per user's intent */
+  background-color: #f3f4f6; /* Tailwind's gray-100 */
+  /* This ensures your app container fills the height */
+  min-height: 100vh;
 }
 
 /* navbar */
 .bg-gray-900 {
   background: var(--bg);
+  border-bottom: 1px solid #e6e9ef; /* Added border for light navbar */
 }
 .text-white {
-  color: white;
+  /* This class is now a misnomer, but we'll keep it for semantics */
+  /* It's used for the "AI Hiring" brand text in the navbar */
+  color: #111827; /* Dark text for light bg */
 }
 .p-4 {
   padding: 1rem;
@@ -67,8 +68,8 @@ body {
   border-radius: 6px;
 }
 .nav-link:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.04);
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.08); /* Light blue hover */
 }
 
 /* cards and layout */
@@ -247,12 +248,4 @@ a {
 :focus {
   outline: 2px solid rgba(37, 99, 235, 0.18);
   outline-offset: 2px;
-}
-
-/* End of stylesheet */
-
-body {
-  background-color: #084fdd; /* This is a light gray (Tailwind's gray-100) */
-  /* This ensures your app container fills the height */
-  min-height: 100vh; 
 }
